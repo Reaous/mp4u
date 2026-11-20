@@ -1,5 +1,8 @@
 <script>
-import { onMount } from "svelte";
+import { createRawSnippet, onMount } from "svelte";
+import { db } from "../lib/db";
+
+    let savedvids = $state([]);
     let stream
     let mediarecorder
     let isrecording = false;
@@ -10,7 +13,17 @@ import { onMount } from "svelte";
     onMount (async ()=> {
     stream = await navigator.mediaDevices.getUserMedia({video:true,audio:true})
     videobox.srcObject = stream
+    await loadvideos()
     }) 
+
+    const loadvideos = async ()=> {
+        const rows = await db.videos.toArray();
+        let temp = [];
+        for (const row of rows){
+            temp.push({id : row.id ,createdat :row.createdat, url:URL.createObjectURL(row.video)})
+        }
+        savedvids = temp;
+    }
 
  
     const startrecording = ()=> {
@@ -21,8 +34,10 @@ import { onMount } from "svelte";
         chunks.push(e.data)
         }
 
-        mediarecorder.onstop = ()=> {
+        mediarecorder.onstop = async ()=> {
         const blob = new Blob(chunks ,{type :"video/webm"})
+        await db.videos.add({ createdat: Date.now(), video:blob});
+        await loadvideos()
         finalvideo=URL.createObjectURL(blob)    
     }
 
@@ -62,3 +77,9 @@ Start the recording :D
 
     </video>
 {/if}
+
+{#each savedvids as video (video.id)}
+    <video src={video.url} controls >
+
+    </video>
+{/each}
