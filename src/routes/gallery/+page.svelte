@@ -27,34 +27,32 @@
 
 
 </script>
-{#if db.videos.length !== 0}
-<div class= "grid grid-cols-4 gap-4 " >
-{#each savedvids as video (video.id) }
+{#if savedvids.length !== 0}
+    <div class= "grid grid-cols-4 gap-4 " >
+        {#each savedvids as video (video.id) }
 
-    <div class ="flex flex-col gap-2">
-        <p>
-            <video src={video.url} controls  >
-                <track kind="captions" />
-            </video>
-        </p>
+            <div class ="flex flex-col gap-2">
+                <p>
+                    <video src={video.url} controls  >
+                        <track kind="captions" />
+                    </video>
+                </p>
 
-        <button onclick ={() => deletesavedvideo(video.id)}>
-            Delete recording?
-        </button>
-
-    </div>
-
-{/each}
-
+                <button onclick ={() => deletesavedvideo(video.id)}>
+                    Delete recording?
+                </button>
+            </div>
+        {/each}
+    </div>       
 {:else}
-<div>
-    <h1> No journals found D: . Go vlog some more !</h1>
-</div>
-
+            <div>
+                <h1> No journals found D: . Go vlog some more !</h1>
+            </div>
+    
 {/if}
-</div>    
-<div> </div>
-     
+   
 <div>
+<div> </div>
     <a href= "/" > go back to home</a>
 </div>
+
