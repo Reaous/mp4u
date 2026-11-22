@@ -3,19 +3,34 @@ import { createRawSnippet, onMount } from "svelte";
 import { db } from "../lib/db";
 
     let savedvids = $state([]);
-    let stream
+    let stream = $state()
     let mediarecorder
-    let isrecording = false;
+    let isrecording = $state(false);
     let chunks = [];
-    let videobox
+    let videobox = $state()
+    let showvideo = $state(false)
 
 
-    onMount (async ()=> {
+    const camon = (async ()=> {
     stream = await navigator.mediaDevices.getUserMedia({video:true,audio:true})
-    videobox.srcObject = stream
-    await loadvideos()
+    showvideo = true
     }) 
 
+    const camoff = (async ()=> {
+        if (stream) {
+            stream.getTracks().forEach((track) => track.stop());
+            stream = undefined ;
+        }
+        showvideo= false
+    })
+
+
+
+    $effect(() => {
+    if (videobox && stream) {
+        videobox.srcObject = stream;
+    }
+    });
 
  
     const startrecording = ()=> {
@@ -29,7 +44,6 @@ import { db } from "../lib/db";
         mediarecorder.onstop = async ()=> {
         const blob = new Blob(chunks ,{type :"video/webm"})
         await db.videos.add({ createdat: Date.now(), video:blob});
-        await loadvideos()
     }
 
 
@@ -51,27 +65,39 @@ import { db } from "../lib/db";
 
 
 </script>
-
-
+{#if showvideo}
+<div >
 <video autoplay playsinline muted bind:this= {videobox} class = "bg-black" >
-
+    
 </video>
-
+</div>
 <div class = "flex gap-4">
 
-<div></div>
-<button onclick={startrecording}>
+<button onclick={startrecording} disabled={isrecording}>
 | Start the recording :D
 </button>
 
 <div> | </div>
 
-<button onclick={stoprecording}>
+<button onclick={stoprecording} disabled = {!isrecording}>
     Stop recording? |
 </button>
 
+{#if isrecording}
+    <h1> Recording underway :3</h1>
+{/if}
 
 </div>
 
+<button onclick ={camoff}>
+    Go back to homepage? 
+</button>
+{/if}
+
+{#if !showvideo}
+<button onclick={camon}>
+    Want to create some journals ? 
+</button>
+{/if}
 
 <a href="/gallery">  view gallery </a>
