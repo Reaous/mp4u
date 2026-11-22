@@ -38,7 +38,7 @@
                     </video>
                 </p>
 
-                <button onclick ={() => deletesavedvideo(video.id)}>
+                <button onclick ={() => deletesavedvideo(video.id)} class =" py-2 rounded bg-red-600 text-white"> 
                     Delete recording?
                 </button>
             </div>

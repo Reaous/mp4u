@@ -61,10 +61,12 @@ import { db } from "../lib/db";
         isrecording=false
 
     }
-
+    
 
 
 </script>
+
+<div class="w-full max-w-m flex flex-col items-center gap-4 text-white">
 {#if showvideo}
 <div >
 <video autoplay playsinline muted bind:this= {videobox} class = "bg-black" >
@@ -73,14 +75,14 @@ import { db } from "../lib/db";
 </div>
 <div class = "flex gap-4">
 
-<button onclick={startrecording} disabled={isrecording}>
-| Start the recording :D
+<button onclick={startrecording} disabled={isrecording} class = "px-10 py-10 rounded bg-red-500 text-white disabled:opacity-30">
+ Start the recording :D
 </button>
 
-<div> | </div>
 
-<button onclick={stoprecording} disabled = {!isrecording}>
-    Stop recording? |
+
+<button onclick={stoprecording} disabled = {!isrecording} class = "px-5 py-3 rounded bg-red-700 text-white disabled:opacity-30">
+    Stop recording? 
 </button>
 
 {#if isrecording}
@@ -89,15 +91,18 @@ import { db } from "../lib/db";
 
 </div>
 
-<button onclick ={camoff}>
+
+<button onclick ={camoff} class="fixed bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded bg-blue-600 text-white ">
     Go back to homepage? 
 </button>
 {/if}
 
+</div>
+
 {#if !showvideo}
-<button onclick={camon}>
+<button onclick={camon} class="px-4 py-2 rounded bg-purple-900 text-white" >
     Want to create some journals ? 
 </button>
 {/if}
 
-<a href="/gallery">  view gallery </a>
+<a href="/gallery" class = "fixed bottom-4 left-1/4 -transalate-x-1 px-4 py-2 rounded bg-green-700 text-white" >  view gallery </a>
