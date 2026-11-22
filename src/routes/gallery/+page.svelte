@@ -7,6 +7,7 @@
     })
 
     let savedvids =$state([]);
+    let videothere = Boolean;
 
     const deletesavedvideo = async (videoid) => {
         await db.videos.delete(videoid)
@@ -21,13 +22,12 @@
         }
         savedvids = temp;
     }
-    
 
-  
+
+
 
 </script>
-
-
+{#if db.videos.length !== 0}
 <div class= "grid grid-cols-4 gap-4 " >
 {#each savedvids as video (video.id) }
 
@@ -43,7 +43,18 @@
         </button>
 
     </div>
-{/each}
-</div>    
 
-<a href= "/"> go back to home</a>
+{/each}
+
+{:else}
+<div>
+    <h1> No journals found D: . Go vlog some more !</h1>
+</div>
+
+{/if}
+</div>    
+<div> </div>
+     
+<div>
+    <a href= "/" > go back to home</a>
+</div>
