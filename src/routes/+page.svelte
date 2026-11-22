@@ -48,6 +48,14 @@ import { db } from "../lib/db";
 
     }
 
+    const deletesavedvideo = async (videoid) => {
+        await db.videos.delete(videoid)
+        await loadvideos()
+
+
+
+    }
+
     const stoprecording = ()=> {
         console.log("stop cickd")
         mediarecorder.stop();
@@ -63,14 +71,21 @@ import { db } from "../lib/db";
 
 </video>
 
+<div class = "flex gap-4">
 
+<div></div>
 <button onclick={startrecording}>
-Start the recording :D
+| Start the recording :D
 </button>
+
+<div> | </div>
 
 <button onclick={stoprecording}>
-    Stop recording 
+    Stop recording? |
 </button>
+
+
+</div>
 
 {#if finalvideo}
     <video src={finalvideo} controls>
@@ -78,7 +93,12 @@ Start the recording :D
     </video>
 {/if}
 
-{#each savedvids as video (video.id)}
+{#each savedvids as video (video.id) }
+<div>
+    <button onclick ={() => deletesavedvideo(video.id)}>
+        Delete recording?
+    </button>
+</div>
     <video src={video.url} controls >
 
     </video>
