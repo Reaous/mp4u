@@ -33,7 +33,7 @@
 
             <div class ="flex flex-col gap-2">
                 <p>
-                    <video src={video.url} controls  >
+                    <video class="w-full rounded-lg bg-black" src={video.url} controls  >
                         <track kind="captions" />
                     </video>
                 </p>
@@ -51,8 +51,7 @@
     
 {/if}
    
-<div>
-<div> </div>
-    <a href= "/" > go back to home</a>
+<div class = "fixed bottom-4 left-1/2 -translate-x-1/2 px 4 px 3 rounded bg-blue-800 text-white " >
+    <a href= "/" > go back to home </a>
 </div>
 

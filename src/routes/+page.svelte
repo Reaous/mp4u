@@ -65,11 +65,12 @@ import { db } from "../lib/db";
 
 
 </script>
-
-<div class="w-full max-w-m flex flex-col items-center gap-4 text-white">
+<div  style = "background-image: url(src/lib/assets/bg.png)" class="min-h-screen w-full flex flex-col justify-center background-position: calc(50% + 1000px) items-center bg-cover  bg-no-repeat">
+<div class="  w-full max-w-m flex flex-col justify-center itements-cer gap-4 text-white bg-center bg-no-repeat">
 {#if showvideo}
 <div >
-<video autoplay playsinline muted bind:this= {videobox} class = "bg-black" >
+
+<video class ="px-2 py-3 "autoplay playsinline muted bind:this= {videobox} >
     
 </video>
 </div>
@@ -85,8 +86,8 @@ import { db } from "../lib/db";
     Stop recording? 
 </button>
 
-{#if isrecording}
-    <h1> Recording underway :3</h1>
+{#if isrecording }
+    <p class = "bg-green-700 px-2 px-3 rounded text-white "> Recording underway :3</p>
 {/if}
 
 </div>
@@ -106,3 +107,4 @@ import { db } from "../lib/db";
 {/if}
 
 <a href="/gallery" class = "fixed bottom-4 left-1/4 -transalate-x-1 px-4 py-2 rounded bg-green-700 text-white" >  view gallery </a>
+</div>
