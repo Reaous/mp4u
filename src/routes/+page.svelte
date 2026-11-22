@@ -8,7 +8,7 @@ import { db } from "../lib/db";
     let isrecording = false;
     let chunks = [];
     let videobox
-    let finalvideo=$state(null);
+
 
     onMount (async ()=> {
     stream = await navigator.mediaDevices.getUserMedia({video:true,audio:true})
@@ -16,14 +16,6 @@ import { db } from "../lib/db";
     await loadvideos()
     }) 
 
-    const loadvideos = async ()=> {
-        const rows = await db.videos.toArray();
-        let temp = [];
-        for (const row of rows){
-            temp.push({id : row.id ,createdat :row.createdat, url:URL.createObjectURL(row.video)})
-        }
-        savedvids = temp;
-    }
 
  
     const startrecording = ()=> {
@@ -38,7 +30,6 @@ import { db } from "../lib/db";
         const blob = new Blob(chunks ,{type :"video/webm"})
         await db.videos.add({ createdat: Date.now(), video:blob});
         await loadvideos()
-        finalvideo=URL.createObjectURL(blob)    
     }
 
 
@@ -48,13 +39,7 @@ import { db } from "../lib/db";
 
     }
 
-    const deletesavedvideo = async (videoid) => {
-        await db.videos.delete(videoid)
-        await loadvideos()
 
-
-
-    }
 
     const stoprecording = ()=> {
         console.log("stop cickd")
@@ -62,6 +47,7 @@ import { db } from "../lib/db";
         isrecording=false
 
     }
+
 
 
 </script>
@@ -87,19 +73,5 @@ import { db } from "../lib/db";
 
 </div>
 
-{#if finalvideo}
-    <video src={finalvideo} controls>
 
-    </video>
-{/if}
-
-{#each savedvids as video (video.id) }
-<div>
-    <button onclick ={() => deletesavedvideo(video.id)}>
-        Delete recording?
-    </button>
-</div>
-    <video src={video.url} controls >
-
-    </video>
-{/each}
+<a href="/gallery">  view gallery </a>
