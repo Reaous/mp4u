@@ -1,6 +1,7 @@
 <script>
 import { createRawSnippet, onMount } from "svelte";
 import { db } from "../lib/db";
+import bg from "#lib/assets/bg.png"
 
     let savedvids = $state([]);
     let stream = $state()
@@ -68,11 +69,11 @@ let nowtime= $state(new Date());
         const interval = setInterval(() => {
             nowtime= new Date();},1000);
         
-        return() => clearInterval(setInterval);
+        return() => clearInterval(Interval);
     });
 
 </script>
-<div  style = "background-image: url(src/lib/assets/bg.png)" class="min-h-screen w-full flex flex-col justify-center background-position: calc(50% + 1000px) items-center bg-cover  bg-no-repeat">
+<div  style = "background-image: url({bg})" class="min-h-screen w-full flex flex-col justify-center background-position: calc(50% + 1000px) items-center bg-cover  bg-no-repeat">
 <div class="  w-full max-w-m flex flex-col justify-center items-center gap-4 text-white bg-center bg-no-repeat">
 
 <div class="fixed top-[17%] right-[9%] text-blue-900 font-bold text-5xl">
@@ -117,7 +118,8 @@ let nowtime= $state(new Date());
 <button onclick={camon} class="px-4 py-2 rounded bg-purple-900 text-white" >
     Want to create some journals ? 
 </button>
-{/if}
 
 <a href="/gallery" class = "fixed bottom-4 left-1/4 -transalate-x-1 px-4 py-2 rounded bg-green-700 text-white" >  view gallery </a>
+
+{/if}
 </div>
