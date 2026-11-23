@@ -69,7 +69,7 @@ let nowtime= $state(new Date());
         const interval = setInterval(() => {
             nowtime= new Date();},1000);
         
-        return() => clearInterval(Interval);
+        return() => clearInterval(interval);
     });
 
 </script>
