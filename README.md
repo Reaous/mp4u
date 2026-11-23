@@ -1,54 +1,19 @@
-# sv
+# what it is 
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+It is a video journaling website where you can journal and store your daily video journals :D
+## How to run :
+Go to "https://mp4u-seven.vercel.app/" and its pretty straightforward button clicking from there!
 
-## Creating a project
+## screenshots
+<img width="1920" height="1080" alt="m3" src="https://github.com/user-attachments/assets/88445da1-0cf0-45fd-ac8a-fb8e17ecfabc" />
+------------------------
+<img width="1920" height="1080" alt="m1" src="https://github.com/user-attachments/assets/729905b1-cd5d-488b-b9fe-8db3a26e9cb8" />
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Frameworks and technology
+This project uses svelte , an amazing javascript framework which is open source and tailwind css , and also another amzing open source framework for indexDB ( which is what i use to store the video journals in the browser persistent memory) , called dexie which helped me alot :D
 
-```sh
-# create a new project
-npx sv create my-app
-```
+## My experiance
+To be honest this was my first time doing any of these frameworks seriously and i had to look up and rely on the mdn documentation and svelte documentation alot since it was my first time using them  dexie i already had a knack for it since i studied mysql in school but js and svelte especially made me go mad with the bugs lol , but at the end it worked out after alot of smashing my head against my table :D.
 
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-npx sv@1.5.0 create --template minimal --types jsdoc --add prettier tailwindcss="plugins:forms" sveltekit-adapter="adapter:static" --install npm mp4u
-```
-
-## Adding features
-
-Add features to your project with `sv add`:
-
-```sh
-npx sv add
-```
-
-For example, to add Tailwind CSS:
-
-```sh
-npx sv add tailwindcss
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
+## Credits :
+To all the open source devs who even made this small project possible , so that i dont have to learn binary or rely on corporations for their propeirtory software , and also all the people who maintain the documention of the code , my goats . 
